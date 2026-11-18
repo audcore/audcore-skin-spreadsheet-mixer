@@ -45,8 +45,8 @@
   ],
   "kind": "web",
   "license": "MIT",
-  "repository": "https://github.com/audcore/audcore-skin-sheet",
-  "description": "以表格呈现通道、效果器和路由的声核网页皮肤",
+  "repository": "https://github.com/audcore/audcore-skin-spreadsheet-mixer",
+  "description": "把通道排成电子表格，按行对照效果器和发送，支持列宽调整与搜索。",
   "descriptions": {
     "zh": "以表格呈现通道、效果器和路由的声核网页皮肤",
     "en": "A spreadsheet-style Audcore mixer skin.",

@@ -1,60 +1,64 @@
-# 表格 · Sheet
+# 声核表格调音台
 
-以电子表格形式呈现声核的通道、效果器和路由。支持中文、English、日本語，以及明暗主题。
+把通道排成电子表格，按行对照效果器和发送，支持列宽调整与搜索。
 
-![表格皮肤](web/matrix-preview.png)
+当前源码版本：**0.4.16**。网页界面，适用于 Windows x64 声核。
 
-## 声核与开发
+![布局预览](web/matrix-preview.png)
 
-- [声核官网](https://audcore.utae.cn/) · [下载声核](https://audcore.utae.cn/download/) · [使用指北](https://audcore.utae.cn/guide/)
-- [skin-dev 皮肤开发入口与 SDK](https://audcore.utae.cn/skin-dev/)
-- [皮肤开发与发布规范](https://github.com/audcore/audcore-document/blob/main/docs/皮肤发布规范.md)
-- [皮肤列表](https://github.com/audcore/audcore-document/blob/main/skins.md)
+## 界面与操作
 
-## 使用
+- 每列一个通道，效果器和发送按行对齐。
+- 拖动标题调整通道顺序，拖动编号格右缘调整列宽。
+- 搜索通道、编号和效果器，在原位高亮匹配项。
 
-当前皮肤版本为 **0.4.16**，接口要求为 Skin API **1.0**，适用于启用网页皮肤支持的 Windows x64 声核。安装后在声核的皮肤设置中选择“表格”。宿主负责音频处理、设备配置、标准菜单与工程保存。
+- 界面语言：中文、英文、日文。
+- 主题：亮色、暗色。
 
-此仓库公开现有版本的源码和独立打包方法。它不代表新的官方在线版本已经发布；在线目录仍以声核官方签名列表为准。
+## 安装
 
-## 独立打包
+[先下载声核](https://audcore.utae.cn/download/)
 
-安装 **Node.js 24.12.0**，不需要 npm 依赖、C++ 编译器或声核私有源码。
+在支持网页皮肤的声核中打开构建生成的 `.skin.audcore` 文件，再到皮肤设置选择「表格」。
+
+所需网页接口为 Skin API 1.0；音频处理、设备配置和工程保存由宿主负责。
+
+公开源码不代表已经更新官方在线版本，下载仍以官方签名列表为准。
+
+## 从源码生成安装包
+
+使用 Node.js **24.12.0**，无需安装 npm 依赖。
 
 ```sh
-git clone https://github.com/audcore/audcore-skin-sheet.git
-cd audcore-skin-sheet
-node --test tools/build-package.test.mjs tests/*.test.mjs
+git clone https://github.com/audcore/audcore-skin-spreadsheet-mixer.git
+cd audcore-skin-spreadsheet-mixer
+node --test tests/package.test.mjs tests/sheet.test.mjs tools/build-package.test.mjs
 node tools/build-package.mjs . dist
 ```
 
-输出：`dist/cn.audcore.routing-matrix-v0.4.16.skin.audcore`。
+最终安装包：
 
-这是网页资源的 ZIP 包，由声核按内容识别。请在声核中安装运行；直接用浏览器打开 HTML 不提供模拟宿主。
+`dist/cn.audcore.routing-matrix-v0.4.16.skin.audcore`
 
-## 项目结构
+打包器从 manifest.json 的文件清单读取资源，生成 ZIP 格式皮肤包。宿主运行所需的资源全部随包交付。
 
-- `manifest.json`：身份、版本、国际化信息、窗口设置和构建规则的唯一来源。
-- `web/`：界面和宿主桥接代码、图标及封面；全部资源随包交付。
-- `tools/`：无需外部依赖的静态网页皮肤打包器、包校验器与构建测试。
-- `LICENSE`：MIT 许可证，适用于本仓库源码及随附自制资源。系统字体只按名称引用，不随包分发。
+## 开发与反馈
 
-打包文件由 `manifest.json` 的 `build.files` 显式列出，打包器不会扫描并包含整个仓库。包内运行清单自动剔除 `build` 字段。
+- [声核官网](https://audcore.utae.cn/)
+- [声核使用指北](https://audcore.utae.cn/guide/)
+- [skin-dev：SDK、接口资料与模拟开发工具](https://audcore.utae.cn/skin-dev/)
+- [皮肤开发指引](https://github.com/audcore/audcore-document/blob/main/docs/皮肤开发指引.md)
+- [manifest 与构建发布规范](https://github.com/audcore/audcore-document/blob/main/docs/皮肤发布规范.md)
+- [所有皮肤的源码列表](https://github.com/audcore/audcore-document/blob/main/skins.md)
+- [此皮肤的问题反馈](https://github.com/audcore/audcore-skin-spreadsheet-mixer/issues)
+- [声核本体的问题反馈](https://github.com/audcore/audcore-document/issues)
 
-## 修改与发布
+修改名称、版本、语言或构建规则时编辑根目录 manifest.json；界面源码和资源按清单维护。每款皮肤只在自己的仓库更新，构建输入无变化时跳过。
 
-保留皮肤 ID，修改版本号后再交付新版本；派生为另一个皮肤时使用自己的 ID。新增文件必须加入打包清单。修改语言声明时，确认界面确实支持相应语言。
+## 许可证与验证范围
 
-官方收录登记见 [skins.md](https://github.com/audcore/audcore-document/blob/main/skins.md)，构建约定见 [皮肤开发与发布规范](https://github.com/audcore/audcore-document/blob/main/docs/皮肤发布规范.md)。作者通过 tag 提供候选，官方固定到提交后审核、构建、打包及发布。已发布版本不能用不同内容覆盖。
+自有代码采用 [MIT 许可证](LICENSE)。系统字体只按名称引用，不随包分发。
 
-首版独立源码调整了共享模块的相对路径，并移除其他布局及浏览器模拟的可选加载入口。0.4.16 移除皮肤中重复的图标名称映射，通道视觉名直接使用宿主推送的 `channelLabels`，语言及自定义名称规则由宿主统一处理；等待名称更新时保留已显示的内容。构建产物按实际版本交付，不覆盖历史官方版本。
-
-当前已完成包格式、资源引用、版本及确定性打包检查。真实宿主的启动和交互验收仍需由发布流程完成；本次开源没有重新启动宿主或替换运行中的皮肤。
-
-## 反馈与许可
-
-请在本仓库 Issues 反馈皮肤问题。声核本身的问题请提交到 [声核问题反馈](https://github.com/audcore/audcore-document/issues)。
-
-Copyright (c) 2026 itorr / 17o2r. Released under the MIT License.
-
-封面与图标生成器：`render-preview.py`（可选开发依赖 Pillow），使用 `python render-preview.py` 更新包内图片。
+- 已验证独立打包、资源引用、重复打包一致性及上述测试。
+- 本轮仓库改名与说明整理没有重新编译或替换在线皮肤包。
+- 未重新启动宿主进行窗口、鼠标交互或跨屏验收。
