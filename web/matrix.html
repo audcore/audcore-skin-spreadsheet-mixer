@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh" data-skin="matrix">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audcel</title>
+  <link rel="stylesheet" href="./matrix.css">
+  <link rel="stylesheet" href="./skin-menu.css">
+</head>
+<body>
+  <div id="skin-root">
+    <header class="toolbar" id="toolbar">
+      <button id="system-menu" type="button">
+        <svg class="sheet-mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <rect x=".5" y=".5" width="15" height="15" rx="3" fill="#217346"/>
+          <path d="M4 5h8v6H4zM4 7h8M7 5v6" fill="none" stroke="#fff" stroke-linejoin="round"/>
+        </svg>
+        <span>Audcel</span>
+      </button>
+      <button id="table-save" class="quick-access" type="button" title="保存" aria-label="保存">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 2.5h8l2.5 2.5v8a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5Z M5 2.5v3h5v-3 M5 13.5v-5h6v5"/></svg>
+      </button>
+      <button id="table-undo" class="quick-access" type="button" title="撤销" aria-label="撤销">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.5 3 2.5 6l3 3M2.5 6H10a3.5 3.5 0 1 1 0 7H8.5"/></svg>
+      </button>
+      <button id="add-channel" class="quick-access" type="button" title="新建通道" aria-label="新建通道">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 3.5v9M3.5 8h9"/></svg>
+      </button>
+      <button id="transport" class="quick-access" type="button" aria-label="虚拟播放" disabled>
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path class="transport-play" d="M5.5 3.5 12.5 8l-7 4.5Z" fill="currentColor" stroke="none"/>
+          <path class="transport-pause" d="M6 4v8m4-8v8" stroke-width="1.8"/>
+        </svg>
+      </button>
+      <div id="window-drag"></div>
+      <div id="table-search-slot">
+        <label id="table-search-box">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="3.8"/><path d="m9.75 9.75 3 3"/></svg>
+          <input id="table-search" type="search" placeholder="搜索通道、效果器" aria-label="搜索通道、效果器" aria-controls="channels" autocomplete="off" spellcheck="false">
+        </label>
+      </div>
+      <button id="settings" class="quick-access" type="button" title="设置" aria-label="设置">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path d="m6.8 2-.4 1.7-1.2.7-1.7-.5-1.2 2 1.3 1.2v1.8l-1.3 1.2 1.2 2 1.7-.5 1.2.7.4 1.7h2.4l.4-1.7 1.2-.7 1.7.5 1.2-2-1.3-1.2V7.1l1.3-1.2-1.2-2-1.7.5-1.2-.7L9.2 2Z"/>
+          <circle cx="8" cy="8" r="2"/>
+        </svg>
+      </button>
+      <button id="table-theme" class="quick-access" type="button" title="切换主题" aria-label="切换主题" disabled>
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path class="theme-moon" d="M13.8 9.5A5.9 5.9 0 0 1 6.5 2.2a6 6 0 1 0 7.3 7.3Z"/>
+          <g class="theme-sun">
+            <circle cx="8" cy="8" r="2.9"/>
+            <path d="M8 1.8v1.3m0 9.8v1.3M1.8 8h1.3m9.8 0h1.3M3.6 3.6l.9.9m7 7 .9.9m0-8.8-.9.9m-7 7-.9.9"/>
+          </g>
+        </svg>
+      </button>
+      <button id="window-minimize" class="caption" type="button" aria-label="最小化">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 8h9"/></svg>
+      </button>
+      <button id="window-maximize" class="caption" type="button" aria-label="最大化">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="9" height="9" rx=".5"/></svg>
+      </button>
+      <button id="window-close" class="caption" type="button" aria-label="关闭窗口">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m4 4 8 8m0-8-8 8"/></svg>
+      </button>
+    </header>
+    <main class="table-viewport" id="table-viewport">
+      <div id="table-rows" class="table-column">
+        <span id="table-number-heading"><span data-table-label="编号">编号</span></span>
+        <span data-table-label="通道名">通道名</span>
+        <span data-table-label="输入">输入</span>
+        <span data-table-label="效果链旁通">效果链旁通</span>
+        <div class="table-row-heading"><span data-table-label="效果器">效果器</span><button id="table-add-effect-row" type="button">＋</button></div>
+        <div class="table-empty-grid"><button id="table-remove-effect-row" type="button" title="减少效果器行">−</button></div>
+        <div class="table-row-heading"><span data-table-label="发送">发送</span><button id="table-add-send-row" type="button">＋</button></div>
+        <div class="table-empty-grid"><button id="table-remove-send-row" type="button" title="减少发送行">−</button></div>
+        <span data-table-label="峰值轨迹">峰值轨迹</span>
+        <span data-table-label="音量">音量</span>
+        <span data-table-label="独奏">独奏</span>
+        <span data-table-label="链接">链接</span>
+        <span data-table-label="快捷键">快捷键</span>
+        <span data-table-label="录音">录音</span>
+        <span data-table-label="相位">相位</span>
+        <span class="table-mute-label" data-table-label="静音">静音</span>
+      </div>
+      <div id="channels" aria-label="通道"></div>
+      <div class="table-extension" aria-hidden="true">
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      </div>
+    </main>
+    <input id="table-scroll-x" class="table-scrollbar" type="range" min="0" max="0" value="0" step="1" aria-label="水平滚动" aria-controls="table-viewport" disabled>
+    <input id="table-scroll-y" class="table-scrollbar" type="range" min="0" max="0" value="0" step="1" aria-label="垂直滚动" aria-orientation="vertical" aria-controls="table-viewport" disabled>
+    <footer id="table-footer" class="table-footer">
+      <span class="table-sheet-tab" data-table-label="表格">表格</span>
+      <div id="status" role="status" aria-live="polite"></div>
+      <output id="audio-status"></output>
+    </footer>
+  </div>
+  <div class="resize-area" data-resize="north" aria-hidden="true"></div>
+  <div class="resize-area" data-resize="south" aria-hidden="true"></div>
+  <div class="resize-area" data-resize="east" aria-hidden="true"></div>
+  <div class="resize-area" data-resize="west" aria-hidden="true"></div>
+  <div class="resize-area" data-resize="northEast" aria-hidden="true"></div>
+  <div class="resize-area" data-resize="northWest" aria-hidden="true"></div>
+  <div class="resize-area" data-resize="southEast" aria-hidden="true"></div>
+  <div class="resize-area" data-resize="southWest" aria-hidden="true"></div>
+  <script type="module" src="./page.mjs"></script>
+</body>
+</html>

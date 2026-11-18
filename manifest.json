@@ -1,0 +1,90 @@
+{
+  "id": "cn.audcore.routing-matrix",
+  "name": "表格",
+  "names": {
+    "zh": "表格",
+    "en": "Sheet",
+    "ja": "表"
+  },
+  "author": "17o2r",
+  "version": "0.4.15",
+  "api": {
+    "major": 1,
+    "minor": 0
+  },
+  "entry": "web/matrix.html",
+  "preview": "web/matrix-preview.png",
+  "window": {
+    "title": "工作簿 - Audcel v${skinVersion} | 声核 v${hostVersion}",
+    "icon": "web/matrix-window.ico",
+    "default": [
+      1080,
+      692
+    ],
+    "min": [
+      440,
+      320
+    ],
+    "max": null,
+    "resizable": true,
+    "maximizable": true
+  },
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "scale": {
+    "min": 0.75,
+    "max": 2,
+    "default": 1
+  },
+  "languages": [
+    "zh",
+    "en",
+    "ja"
+  ],
+  "kind": "web",
+  "license": "MIT",
+  "repository": "https://github.com/audcore/audcore-skin-sheet",
+  "description": "以表格呈现通道、效果器和路由的声核网页皮肤",
+  "descriptions": {
+    "zh": "以表格呈现通道、效果器和路由的声核网页皮肤",
+    "en": "A spreadsheet-style Audcore mixer skin.",
+    "ja": "表形式のミキサー画面"
+  },
+  "build": {
+    "schema": 1,
+    "recipe": "web-static",
+    "platform": "windows-x86_64",
+    "toolchain": {
+      "tools": {
+        "node": "24.12.0"
+      }
+    },
+    "files": [
+      "LICENSE",
+      "web/channel-color.mjs",
+      "web/channel-name.mjs",
+      "web/i18n-cache.mjs",
+      "web/latency.mjs",
+      "web/link-slots.mjs",
+      "web/matrix-preview.png",
+      "web/matrix-window.ico",
+      "web/matrix.css",
+      "web/matrix.html",
+      "web/meters.mjs",
+      "web/page.mjs",
+      "web/pending-toggle.mjs",
+      "web/send-label.mjs",
+      "web/send-targets.mjs",
+      "web/skin-menu.css",
+      "web/skin-menu.mjs",
+      "web/skin.mjs",
+      "web/startup.mjs",
+      "web/transport-control.mjs",
+      "web/webview-bridge.mjs",
+      "web/window-controls.mjs",
+      "web/xair-fader.mjs"
+    ]
+  }
+}
