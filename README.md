@@ -4,6 +4,13 @@
 
 ![表格皮肤](web/matrix-preview.png)
 
+## 声核与开发
+
+- [声核官网](https://audcore.utae.cn/) · [下载声核](https://audcore.utae.cn/download/) · [使用指北](https://audcore.utae.cn/guide/)
+- [skin-dev 皮肤开发入口与 SDK](https://audcore.utae.cn/skin-dev/)
+- [皮肤开发与发布规范](https://github.com/audcore/audcore-document/blob/main/docs/皮肤发布规范.md)
+- [皮肤列表](https://github.com/audcore/audcore-document/blob/main/skins.md)
+
 ## 使用
 
 当前皮肤版本为 **0.4.16**，接口要求为 Skin API **1.0**，适用于启用网页皮肤支持的 Windows x64 声核。安装后在声核的皮肤设置中选择“表格”。宿主负责音频处理、设备配置、标准菜单与工程保存。
@@ -17,7 +24,7 @@
 ```sh
 git clone https://github.com/audcore/audcore-skin-sheet.git
 cd audcore-skin-sheet
-node --test tools/build-package.test.mjs
+node --test tools/build-package.test.mjs tests/*.test.mjs
 node tools/build-package.mjs . dist
 ```
 
@@ -38,7 +45,7 @@ node tools/build-package.mjs . dist
 
 保留皮肤 ID，修改版本号后再交付新版本；派生为另一个皮肤时使用自己的 ID。新增文件必须加入打包清单。修改语言声明时，确认界面确实支持相应语言。
 
-官方收录登记与构建约定见 [皮肤登记与发布规范 PR](https://github.com/itorr/audcore-document/pull/13)，合入后在资料仓库的 `skins.md` 和 `docs/皮肤发布规范.md` 维护。作者通过 tag 提供候选，官方固定到提交后审核、构建、打包及发布。已发布版本不能用不同内容覆盖。
+官方收录登记与构建约定见 [皮肤登记与发布规范 PR](https://github.com/audcore/audcore-document/pull/13)，合入后在资料仓库的 `skins.md` 和 `docs/皮肤发布规范.md` 维护。作者通过 tag 提供候选，官方固定到提交后审核、构建、打包及发布。已发布版本不能用不同内容覆盖。
 
 首版独立源码调整了共享模块的相对路径，并移除其他布局及浏览器模拟的可选加载入口。0.4.16 移除皮肤中重复的图标名称映射，通道视觉名直接使用宿主推送的 `channelLabels`，语言及自定义名称规则由宿主统一处理；等待名称更新时保留已显示的内容。构建产物按实际版本交付，不覆盖历史官方版本。
 
@@ -46,6 +53,8 @@ node tools/build-package.mjs . dist
 
 ## 反馈与许可
 
-请在本仓库 Issues 反馈皮肤问题。声核本身的问题请提交到 [声核问题反馈](https://github.com/itorr/audcore-document/issues)。
+请在本仓库 Issues 反馈皮肤问题。声核本身的问题请提交到 [声核问题反馈](https://github.com/audcore/audcore-document/issues)。
 
 Copyright (c) 2026 itorr / 17o2r. Released under the MIT License.
+
+封面与图标生成器：`render-preview.py`（可选开发依赖 Pillow），使用 `python render-preview.py` 更新包内图片。
