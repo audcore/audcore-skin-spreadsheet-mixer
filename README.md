@@ -32,7 +32,9 @@
 ```sh
 git clone https://github.com/audcore/audcore-skin-spreadsheet-mixer.git
 cd audcore-skin-spreadsheet-mixer
-node --test tests/package.test.mjs tests/sheet.test.mjs tools/build-package.test.mjs
+node --test tests/package.test.mjs
+node --test tests/sheet.test.mjs
+node --test tools/build-package.test.mjs
 node tools/build-package.mjs . dist
 ```
 
