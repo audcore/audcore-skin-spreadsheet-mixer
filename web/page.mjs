@@ -1,4 +1,4 @@
-import { channelDisplayName, compactInputLabel, compactOutputLabel } from "./channel-name.mjs";
+import { compactInputLabel, compactOutputLabel } from "./channel-name.mjs";
 import { channelDisplayColor } from "./channel-color.mjs";
 import { localizeHostError, mountSkin } from "./skin.mjs";
 import { revealNativeCover } from "./startup.mjs";
@@ -1754,7 +1754,8 @@ function render(state, event = null) {
     if (channel.align_right && !channel.hidden) firstRight = false;
     const color = channelDisplayColor(channel);
     row.item.style.setProperty("--channel-color", color);
-    const channelLabel = state.channelLabels?.[String(channel.id)] ?? channelDisplayName(channel, t);
+    // Preserve the last host label while presentation updates are in flight.
+    const channelLabel = state.channelLabels?.[String(channel.id)] ?? row.name.textContent;
     row.name.textContent = channelLabel;
     const channelSettingsLabel = hasChannelSettingsButton ? `${channelLabel} · ${t("设置通道")}` : channelLabel;
     row.name.setAttribute("aria-label", channelSettingsLabel);
