@@ -38,7 +38,7 @@ node tools/build-package.mjs . dist
 
 保留皮肤 ID，修改版本号后再交付新版本；派生为另一个皮肤时使用自己的 ID。新增文件必须加入打包清单。修改语言声明时，确认界面确实支持相应语言。
 
-官方收录登记位于 [skins.md](https://github.com/itorr/audcore-document/blob/main/skins.md)，构建约定见 [皮肤发布规范](https://github.com/itorr/audcore-document/blob/main/docs/皮肤发布规范.md)。作者通过 tag 提供候选，官方固定到提交后审核、构建、打包及发布。已发布版本不能用不同内容覆盖。
+官方收录登记与构建约定见 [皮肤登记与发布规范 PR](https://github.com/itorr/audcore-document/pull/13)，合入后在资料仓库的 `skins.md` 和 `docs/皮肤发布规范.md` 维护。作者通过 tag 提供候选，官方固定到提交后审核、构建、打包及发布。已发布版本不能用不同内容覆盖。
 
 首版独立源码调整了共享模块的相对路径，并移除其他布局及浏览器模拟的可选加载入口；没有新增皮肤功能。独立仓库打出的文件与历史官方包可能具有不同哈希，不能直接覆盖同版本的官方产物。
 
